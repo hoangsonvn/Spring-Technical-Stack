@@ -37,18 +37,6 @@
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />
     </root>
-    <root level="trace">
-        <appender-ref ref="RollingFile" />
-        <appender-ref ref="Console" />
-    </root>
-    <root level="debug">
-        <appender-ref ref="RollingFile" />
-        <appender-ref ref="Console" />
-    </root>
-    <root level="error">
-        <appender-ref ref="RollingFile" />
-        <appender-ref ref="Console" />
-    </root>
 
     <!-- LOG "com.baeldung*" at TRACE level -->
     <logger name="com.example.replication" level="trace" additivity="false">
