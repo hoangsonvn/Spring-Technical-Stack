@@ -12,6 +12,7 @@ public class DataSourceAop {
 
     @Pointcut("execution(* com.example.replication.repository..*.find*(..)) " +
             //     " || execution(* com.example.replication.service..*.find*(..))" +
+            "execution(* com.example.replication.repository..*.get*(..))" +
             "|| execution(* com.example.replication.repository..*.exist*(..))")
     public void readPointcut() {
 
