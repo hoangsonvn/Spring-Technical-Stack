@@ -29,7 +29,7 @@ public class RabbitProducer {
         //第一个参数是路由键
         String content = "hello," + new Date();
         log.warn("消息发送--->content={}", content);
-        rabbitTemplate.convertAndSend("duanxin.fanout.queue", content);
+        rabbitTemplate.convertAndSend("fanout_order_exchange", "", content);
     }
 
 

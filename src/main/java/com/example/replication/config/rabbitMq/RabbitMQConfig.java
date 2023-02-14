@@ -23,6 +23,7 @@ public class RabbitMQConfig {
     private String host;
 
 
+
     // 声明注册交换机
     @Bean
     public FanoutExchange fanoutExchange() {
