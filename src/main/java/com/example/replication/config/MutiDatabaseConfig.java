@@ -190,10 +190,11 @@ public class MutiDatabaseConfig {
 
     Properties additionalProperties() {
         Properties properties = new Properties() {{
-            put("hibernate.jdbc.batch_size", "50");
+            put("hibernate.jdbc.batch_size", "1000");
             put("hibernate.order_updates", "true");
             put("hibernate.batch_versioned_data", "true");
             put("hibernate.order_inserts", "true");
+            put("hibernate.show_sql", "true");
             put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL10Dialect");
             put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto.master1.common"));
         }};
@@ -204,8 +205,8 @@ public class MutiDatabaseConfig {
 
     @Bean(name = "multiRoutingDataSource")
     public DataSource multiRoutingDataSource(@Qualifier("dataSourceMaster1") DataSource masterDataSource,
-                                          @Qualifier("dataSourceSlave1") DataSource slave1DataSource,
-                                          @Qualifier("dataSourceSlave2") DataSource slave2DataSource) {
+                                             @Qualifier("dataSourceSlave1") DataSource slave1DataSource,
+                                             @Qualifier("dataSourceSlave2") DataSource slave2DataSource) {
         Map<Object, Object> targetDataSources = new HashMap<>();
         targetDataSources.put(DBTypeEnum.MASTER, masterDataSource);
         targetDataSources.put(DBTypeEnum.SLAVE1, slave1DataSource);
