@@ -21,21 +21,20 @@ public class DBContextHolder {
 
     public static void master() {
         set(DBTypeEnum.MASTER);
-        System.out.println("切换到master");
+        System.out.println("master");
     }
 
     public static void slave() {
-        //  轮询
         int index = counter.getAndIncrement() % 2;
         if (counter.get() > 9999) {
             counter.set(-1);
         }
         if (index == 0) {
             set(DBTypeEnum.SLAVE1);
-            System.out.println("切换到slave1");
+            System.out.println("slave1");
         }else {
             set(DBTypeEnum.SLAVE2);
-            System.out.println("切换到slave2");
+            System.out.println("slave2");
         }
     }
 

@@ -1,7 +1,7 @@
 package com.example.replication.controller;
 
 import com.example.replication.entity.Member;
-import com.example.replication.service.MemberServiceImpl;
+import com.example.replication.service.serviceimpl.MemberServiceImpl;
 import com.example.replication.util.Common;
 import com.example.replication.util.cache.Cache;
 import com.example.replication.util.entity.Response;
@@ -11,6 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
 @Controller
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -19,19 +23,33 @@ public class MemberController {
     private final MemberServiceImpl memberService;
     private final Cache cache;
 
-    @GetMapping("")
+ /*   @GetMapping("")
     public ResponseEntity<?> findAll() {
-        return ResponseEntity.ok(memberService.findAll());
-    }
+        List<String> stringList = new ArrayList<>();
+        stringList.add("1");
+        stringList.add("2");
+        stringList.forEach((s)->CompletableFuture.runAsync(()-> System.out.println(s)));
+
+        CompletableFuture.runAsync(()->{
+//           try {
+//               Thread.sleep(5000);
+            System.out.println(Thread.currentThread().getName()+"1");
+//           } catch (InterruptedException e) {
+//               e.printStackTrace();
+//           }
+            System.out.println("runned");});
+        System.out.println("123");
+        return Response.data(memberService.findAll());
+    }*/
 
     @GetMapping("/find")
     public ResponseEntity<?> findOne(@RequestParam long id) {
         Member member = (Member) cache.get(Common.MEMBER + id);
         if (member == null){
             member = memberService.findOne(id).orElseThrow();
-            System.out.println("not cache");
+            log.info("not cache");
         }
-        return ResponseEntity.ok(member);
+        return Response.data(member);
     }
 
     @PostMapping("")

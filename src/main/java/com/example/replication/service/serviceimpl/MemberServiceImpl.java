@@ -1,4 +1,4 @@
-package com.example.replication.service;
+package com.example.replication.service.serviceimpl;
 
 
 import com.example.replication.entity.Member;
@@ -31,10 +31,4 @@ public class MemberServiceImpl {
         return memberRepository.findAll();
     }
 
-    public String getToken(String appId) {
-        //  有些读操作必须读主数据库
-        //  比如，获取微信access_token，因为高峰时期主从同步可能延迟
-        //  这种情况下就必须强制从主数据读
-        return null;
-    }
 }

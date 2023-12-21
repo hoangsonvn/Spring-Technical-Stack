@@ -17,7 +17,7 @@ public class MemberMQController {
     @GetMapping("/mq")
     public String sendMsg() {
         rabbitProducer.sendMsg();
-        return "done";
+        return "sent";
     }
 
 
